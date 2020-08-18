@@ -1,25 +1,20 @@
-import React from 'react';
-import logo from './logo.svg';
+import React,{useState} from 'react';
 import './App.css';
+import ContextProvider from './components/ContextProvider';
+import Gallery from './components/Gallery';
+import ModalGallery from './components/ModalGallery'
 
 function App() {
+
+  const [selectedImg, setSelectedImg] = useState(null)
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+
+    <ContextProvider>
+      <Gallery setSelectedImg={setSelectedImg}/>
+      {console.log(selectedImg)}
+     {selectedImg &&  <ModalGallery  selectedImg={selectedImg} setSelectedImg={setSelectedImg}/>}
+    </ContextProvider>
   );
 }
 
